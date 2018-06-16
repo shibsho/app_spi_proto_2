@@ -11,11 +11,11 @@ class TopScreen extends React.Component {
 
   render() {
 
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-
-        <TouchableOpacity onPress={ () => { navigate('MemoCreate') }} style={styles.btn}>
-          <Text style={styles.btnTitle}>問題一覧</Text>
+        <TouchableOpacity onPress={ () => { navigate('Patterns') }} style={styles.btn}>
+          <Text style={styles.btnTitle}>学習モード</Text>
         </TouchableOpacity>
 
       </View>

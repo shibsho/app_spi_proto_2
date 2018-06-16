@@ -6,7 +6,10 @@ class QuestionScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      question_list: [],
       question: [],
+      answered: false,
+      order: 0,
     };
   }
 
@@ -17,7 +20,13 @@ class QuestionScreen extends React.Component {
       .then((response) => response.json())
       .then((responseJson) => {
         this.setState({
-          question: responseJson[0],
+          question_list: responseJson,
+        })
+      })
+      .then(() => {
+        const { question_list, order } = this.state;
+        this.setState({
+          question: question_list[order]
         })
       })
       .catch((error) =>{
@@ -39,14 +48,27 @@ class QuestionScreen extends React.Component {
     }
     this.setState({
       explanation: explanation,
+      answered: true,
+    })
+  }
+
+  nextHandle(order){
+    order += 1;
+    const { question_list } = this.state;
+    this.setState({
+      question: question_list[order],
+      answered: false,
+      judge: null,
+      explanation: null,
+      order: order,
     })
   }
 
 
-
   render() {
 
-    const { question } = this.state;
+    const { question, answered } = this.state;
+    let { order } = this.state;
     let color = '#888';
 
     if (this.state.judge === '○') {
@@ -54,8 +76,7 @@ class QuestionScreen extends React.Component {
     }
 
     return (
-      <View style={styles.container}>
-      <ScrollView>
+      <ScrollView style={styles.container}>
         <Text>所要（{ question.time_limit }）</Text>
         
         <View style={styles.statement_1Container}> 
@@ -65,25 +86,31 @@ class QuestionScreen extends React.Component {
 
         <View style={styles.choiceButtonContainer}>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,1) } style={styles.choiceButton} >
-            <Text>1. { question.choice_1 }</Text>
+            <Text>1.   { question.choice_1 }</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,2) } style={styles.choiceButton}>
-            <Text>2. { question.choice_2 }</Text>
+            <Text>2.   { question.choice_2 }</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,3) } style={styles.choiceButton}>
-            <Text>3. { question.choice_3 }</Text>
+            <Text>3.   { question.choice_3 }</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,4) } style={styles.choiceButton}>
-            <Text>4. { question.choice_4 }</Text>
+            <Text>4.   { question.choice_4 }</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,5) } style={styles.choiceButton}>
-            <Text>5. { question.choice_5 }</Text>
+            <Text>5.   { question.choice_5 }</Text>
           </TouchableOpacity>
         </View>
         <Text style={[styles.judge, { color }]}>{ this.state.judge }</Text>
         <Text>{ this.state.explanation }</Text>
-        </ScrollView>
-      </View>
+        
+        { answered ? 
+          <TouchableOpacity onPress={ this.nextHandle.bind(this,order) } style={styles.nextButton}>
+            <Text style={styles.nextButtonText}>次の問題 ></Text>
+          </TouchableOpacity>
+          : null
+        }
+      </ScrollView>
     );
   }
 }
@@ -91,7 +118,7 @@ class QuestionScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 7,
+    padding: 20,
   },
   statement_1Container: {
     padding: 20,
@@ -126,6 +153,17 @@ const styles = StyleSheet.create({
   judge: {
     textAlign: 'center',
     fontSize: 100,
+  },
+  nextButton: {
+    backgroundColor: '#CCC',
+    padding: 15,
+    marginTop: 30,
+    marginBottom: 100,
+    shadowOffset:{  width: 0,  height: 1,  },
+    shadowColor: '#AAA',
+    shadowOpacity: 1.0,
+  },
+  nextButtonText: {
   }
 });
 

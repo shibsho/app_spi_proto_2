@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View, TouchableOpacity, Button } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
-import { Hoshi } from 'react-native-textinput-effects';
+import { Jiro } from 'react-native-textinput-effects';
 
 
 class LoginScreen extends React.Component {
@@ -27,28 +27,22 @@ class LoginScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-  <Hoshi
-    label={'ユーザー名'}
-    // this is used as active border color
-    borderColor={'#abd3cc'}
-    // this is used to set backgroundColor of label mask.
-    // please pass the backgroundColor of your TextInput container.
-    backgroundColor={'#F9F7F6'}
-    autoCapitalize={'none'}
-    inputStyle={{fontSize:20, padding:10}}
-  />
-  <Hoshi
-    label={'パスワード'}
-    // this is used as active border color
-    borderColor={'#b76c94'}
-    // this is used to set backgroundColor of label mask.
-    // please pass the backgroundColor of your TextInput container.
-    backgroundColor={'#F9F7F6'}
-    autoCapitalize={'none'}
-    secureTextEntry={true}
-    inputStyle={{fontSize:20, padding:10}}
-
-  />
+        <View style={styles.textInputContainer}>
+          <Jiro
+            label={'ユーザー名'}
+            borderColor={'#abd3cc'}
+            autoCapitalize={'none'}
+            inputStyle={{fontSize:20, padding:3}}
+          />
+          <Jiro
+            label={'パスワード'}
+            borderColor={'#b76c94'}
+            autoCapitalize={'none'}
+            secureTextEntry={true}
+            style={{marginTop:20}}
+            inputStyle={{fontSize:20, padding:3}}
+          />
+        </View>
 
 
         <TouchableOpacity onPress={ this.login.bind(this) }>
@@ -68,6 +62,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 1,
     backgroundColor: '#fff',
+  },
+  textInputContainer: {
+    paddingRight: 20,
+    paddingLeft: 20,
   },
 });
 

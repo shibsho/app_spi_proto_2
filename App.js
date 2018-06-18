@@ -16,7 +16,7 @@ const App = createStackNavigator({
 },
 {
   navigationOptions: {
-    headerTitle: 'SPI App',
+    headerTitle: 'くいずあぷり',
     headerStyle: { backgroundColor: '#265366' },
     headerTitleStyle: { color: '#FFF' },
     headerTintColor: '#AAA',

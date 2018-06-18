@@ -146,9 +146,9 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 15,
     marginBottom: 1,
-    shadowOffset:{  width: 0,  height: 1,  },
-    shadowColor: '#AAA',
-    shadowOpacity: 1.0,
+    shadowOffset:{  width: 0,  height: 7,  },
+    shadowColor: '#557777',
+    shadowOpacity: 1,
   },
   judge: {
     textAlign: 'center',

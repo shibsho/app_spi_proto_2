@@ -77,7 +77,7 @@ class QuestionScreen extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Text>所要（{ question.time_limit }）</Text>
+        <Text>所要時間　{ question.time_limit }</Text>
         
         <View style={styles.statement_1Container}> 
           <Text style={styles.questionTitle}>問題</Text>       

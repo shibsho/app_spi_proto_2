@@ -77,6 +77,7 @@ class QuestionScreen extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
+    
         <Text>所要時間　{ question.time_limit }</Text>
         
         <View style={styles.statement_1Container}> 
@@ -85,19 +86,19 @@ class QuestionScreen extends React.Component {
         </View>
 
         <View style={styles.choiceButtonContainer}>
-          <TouchableOpacity onPress={ this.submitAnswer.bind(this,1) } style={styles.choiceButton} >
+          <TouchableOpacity onPress={ this.submitAnswer.bind(this,1) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>1.   { question.choice_1 }</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={ this.submitAnswer.bind(this,2) } style={styles.choiceButton}>
+          <TouchableOpacity onPress={ this.submitAnswer.bind(this,2) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>2.   { question.choice_2 }</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={ this.submitAnswer.bind(this,3) } style={styles.choiceButton}>
+          <TouchableOpacity onPress={ this.submitAnswer.bind(this,3) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>3.   { question.choice_3 }</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={ this.submitAnswer.bind(this,4) } style={styles.choiceButton}>
+          <TouchableOpacity onPress={ this.submitAnswer.bind(this,4) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>4.   { question.choice_4 }</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={ this.submitAnswer.bind(this,5) } style={styles.choiceButton}>
+          <TouchableOpacity onPress={ this.submitAnswer.bind(this,5) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>5.   { question.choice_5 }</Text>
           </TouchableOpacity>
         </View>

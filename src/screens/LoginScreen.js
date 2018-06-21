@@ -2,7 +2,8 @@ import React from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View, TouchableOpacity, Button } from 'react-native';
 import { StackActions, NavigationActions } from 'react-navigation';
 import { Jiro } from 'react-native-textinput-effects';
-
+import { DangerZone } from 'expo';
+let { Lottie } = DangerZone;
 
 class LoginScreen extends React.Component {
   constructor(props) {
@@ -23,6 +24,10 @@ class LoginScreen extends React.Component {
     this.props.navigation.dispatch(resetAction);
   }
 
+  componentDidMount() {
+    this.animation.play();
+  }
+
   render() {
 
     return (
@@ -39,10 +44,23 @@ class LoginScreen extends React.Component {
             borderColor={'#b76c94'}
             autoCapitalize={'none'}
             secureTextEntry={true}
-            style={{marginTop:20}}
+            style={{marginTop:3}}
             inputStyle={{fontSize:20, padding:3}}
           />
         </View>
+
+        <Lottie
+          ref={animation => {
+            this.animation = animation;
+          }}
+          style={{
+            width: 100,
+            height: 100
+          }}
+          loop={ false }
+          speed={ 5 }
+          source={require("../../animations/loader_and_success.json")}
+        />
 
 
         <TouchableOpacity onPress={ this.login.bind(this) }>

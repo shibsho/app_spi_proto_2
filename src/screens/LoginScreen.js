@@ -28,6 +28,7 @@ class LoginScreen extends React.Component {
     this.animation.play();
   }
 
+
   render() {
 
     return (
@@ -49,6 +50,14 @@ class LoginScreen extends React.Component {
           />
         </View>
 
+        <TouchableOpacity onPress={ this.login.bind(this) }>
+          <Text>ログインする</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={ () => {this.props.navigation.navigate('SignUp')} }>
+          <Text>登録画面へ</Text>
+        </TouchableOpacity>
+
         <Lottie
           ref={animation => {
             this.animation = animation;
@@ -62,14 +71,6 @@ class LoginScreen extends React.Component {
           source={require("../../animations/loader_and_success.json")}
         />
 
-
-        <TouchableOpacity onPress={ this.login.bind(this) }>
-          <Text>ログインする</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={ () => {this.props.navigation.navigate('SignUp')} }>
-          <Text>登録画面へ</Text>
-        </TouchableOpacity>
       </View>
     );
   }

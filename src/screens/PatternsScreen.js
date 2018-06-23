@@ -57,6 +57,7 @@ class PatternsScreen extends React.Component {
             speed={ 1 }
             source={require("../../animations/loading.json")}
           />
+          
           <TouchableOpacity onPress={ this.press.bind(this) }>
             <Text>ボタン</Text>
           </TouchableOpacity>

@@ -1,5 +1,7 @@
 import React from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity, Button } from 'react-native';
+import { DangerZone } from 'expo';
+let { Lottie } = DangerZone;
 
 
 class QuestionScreen extends React.Component {
@@ -34,7 +36,6 @@ class QuestionScreen extends React.Component {
       });
   }
 
-
   submitAnswer(num){
     const { correct_choice, explanation } = this.state.question;
     if (num==correct_choice){
@@ -64,6 +65,9 @@ class QuestionScreen extends React.Component {
     })
   }
 
+  componentDidMount() {
+    this.animation.play();
+  }
 
   render() {
 
@@ -79,6 +83,7 @@ class QuestionScreen extends React.Component {
       <ScrollView style={styles.container}>
     
         <Text>所要時間　{ question.time_limit }</Text>
+
         
         <View style={styles.statement_1Container}> 
           <Text style={styles.questionTitle}>問題</Text>       
@@ -88,6 +93,19 @@ class QuestionScreen extends React.Component {
         <View style={styles.choiceButtonContainer}>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,1) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>1.   { question.choice_1 }</Text>
+        
+              <Lottie
+                ref={animation => {
+                  this.animation = animation;
+                }}
+                style={{
+                  width: 100,
+                  height: 100
+                }}
+                loop={ false }
+                speed={ 10000000 }
+                source={require("../../animations/loader_and_success.json")}
+              />
           </TouchableOpacity>
           <TouchableOpacity onPress={ this.submitAnswer.bind(this,2) } style={styles.choiceButton} disabled={ this.state.answered }>
             <Text>2.   { question.choice_2 }</Text>
@@ -102,7 +120,9 @@ class QuestionScreen extends React.Component {
             <Text>5.   { question.choice_5 }</Text>
           </TouchableOpacity>
         </View>
+
         <Text style={[styles.judge, { color }]}>{ this.state.judge }</Text>
+       
         <Text>{ this.state.explanation }</Text>
         
         { answered ? 
